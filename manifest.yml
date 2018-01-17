@@ -1,0 +1,11 @@
+---
+applications:
+#- name: cf-spring
+- name: jackson-collections
+  path: target/asset-catalog-project-0.0.1-SNAPSHOT.jar
+  domain: cfapps.io
+  memory: 800M
+  #buildpack: java_buildpack
+  buildpack: java_buildpack
+  instances: 1
+  #random-route: true

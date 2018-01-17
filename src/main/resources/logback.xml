@@ -1,0 +1,19 @@
+<configuration>
+
+  <!-- Set custom log pattern (dd-MM-yyyy date format) -->
+  <property
+    name="CONSOLE_LOG_PATTERN"
+    value="%d{dd-MM-yyyy HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n" />
+
+  <!-- Include Spring Boot's default logging configuration. -->
+  <include resource="org/springframework/boot/logging/logback/base.xml" />
+
+  <logger name="org.thymeleaf" level="INFO" />
+  <logger name="org.springframework" level="DEBUG" />
+  <logger name="info.jsjackson.catalog" level="DEBUG" />
+  <logger name="org.hibernate" level="INFO" />
+
+  <root level="INFO">
+    <appender-ref ref="CONSOLE" />
+  </root>
+</configuration>

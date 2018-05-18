@@ -1,2 +1,2 @@
 # asset-catalog
-A test project to catalog items
+A test project written in SpringBoot 1.x - catalogs things

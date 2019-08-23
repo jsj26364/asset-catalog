@@ -54,13 +54,13 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 		
 	}
 	
-	/* @Autowired  --Spring Security’s in-memory authentication provider
+	 @Autowired  //--Spring Security’s in-memory authentication provider
 	 public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 		 auth
 	     	.inMemoryAuthentication()
 	        .withUser("admin").password("admin").roles("ADMIN")
 	        .and().withUser("user").password("user").roles("USER");
-	    }*/
+	    }
 	
 	/**
 	 *  Set up the DAO authentication provider
@@ -77,7 +77,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 		
 	}
 	
-	/* About antmatchers: (see https://docs.spring.io/spring/docs/3.1.x/javadoc-api/org/springframework/util/AntPathMatcher.html)
+	/** About antmatchers: (see https://docs.spring.io/spring/docs/3.1.x/javadoc-api/org/springframework/util/AntPathMatcher.html)
 	 * 
 	 * The mapping matches URLs using the following rules:
 		? matches one character

@@ -1,0 +1,28 @@
+#version: "3.2"
+version: "3.7"
+
+# XXX timezone
+# with tzdata:
+# TZ=Europe/Amsterdam
+# without:
+#volumes:
+#    - "/etc/timezone:/etc/timezone:ro"
+#    - "/etc/localtime:/etc/localtime:ro"
+
+services:
+  asset-catalog:
+    image: jsj26364/asset-catalog
+    build:
+      context: .
+      #args:
+      #  http_proxy: ${HTTP_PROXY}
+    restart: unless-stopped
+    environment: {}
+    ports:
+      - "10080:10080"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - asset-catalog-data:/var/data
+
+volumes:
+  asset-catalog-data: {}

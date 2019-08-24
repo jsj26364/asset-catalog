@@ -3,7 +3,8 @@ package info.jsjackson.catalog.bootstrap;
 import java.math.BigDecimal;
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.Configuration;
@@ -14,32 +15,24 @@ import info.jsjackson.catalog.domain.Asset;
 import info.jsjackson.catalog.domain.Role;
 import info.jsjackson.catalog.domain.User;
 import info.jsjackson.catalog.repositories.AssetRepository;
+import info.jsjackson.catalog.services.AssetService;
 import info.jsjackson.catalog.services.RoleService;
 import info.jsjackson.catalog.services.UserService;
 
 @Component
 public class SpringJpaBootstrap implements ApplicationListener<ContextRefreshedEvent> {
 
-	private AssetRepository assetRepository;
+	private AssetService assetService;
 	private UserService userService;
 	private RoleService roleService;
 
-	private Logger log = Logger.getLogger(SpringJpaBootstrap.class);
-
-	@Autowired
-	public void setAssetRepository(AssetRepository assetRepository) {
-		this.assetRepository = assetRepository;
-	}
-
-	@Autowired
-	public void setUserService(UserService userService) {
+	public SpringJpaBootstrap(AssetService assetService, UserService userService, RoleService roleService) {
+		this.assetService = assetService;
 		this.userService = userService;
-	}
-
-	@Autowired
-	public void setRoleService(RoleService roleService) {
 		this.roleService = roleService;
 	}
+
+	private Logger log = LoggerFactory.getLogger(SpringJpaBootstrap.class);
 
 	@Override
 	public void onApplicationEvent(ContextRefreshedEvent event) {
@@ -58,7 +51,7 @@ public class SpringJpaBootstrap implements ApplicationListener<ContextRefreshedE
 		yoga.setImageUrl(
 				"https://js-jackson.info/wp-content/uploads/2017/12/jackson_collection_laptop-rf412049699c14ba5b68bb1c09182bfa2_8nax2_512.jpg");
 		yoga.setAssetId("80Y7006CAU");
-		assetRepository.save(yoga);
+		assetService.saveAsset(yoga);
 
 		log.info("Saved Lenovo laptop - id: " + yoga.getId());
 
@@ -68,7 +61,7 @@ public class SpringJpaBootstrap implements ApplicationListener<ContextRefreshedE
 		tv.setImageUrl(
 				"https://js-jackson.info/wp-content/uploads/2017/12/jackson_collection_tv-rf412049699c14ba5b68bb1c09182bfa2_8nax2_512.jpg");
 		tv.setAssetId("KDL-43W800C");
-		assetRepository.save(tv);
+		assetService.saveAsset(tv);
 
 		log.info("Saved TV - id: " + tv.getId());
 
@@ -78,7 +71,7 @@ public class SpringJpaBootstrap implements ApplicationListener<ContextRefreshedE
 		desktop.setImageUrl(
 				"https://js-jackson.info/wp-content/uploads/2017/12/jackson_collection_desktop-rf412049699c14ba5b68bb1c09182bfa2_8nax2_512.jpg");
 		desktop.setAssetId("7552-6884-5711-0661");
-		assetRepository.save(desktop);
+		assetService.saveAsset(desktop);
 
 		log.info("Saved Desktop - id: " + desktop.getId());
 
@@ -88,7 +81,7 @@ public class SpringJpaBootstrap implements ApplicationListener<ContextRefreshedE
 		dellLaptop.setImageUrl(
 				"https://js-jackson.info/wp-content/uploads/2017/12/jackson_collection_oldlaptop-rf412049699c14ba5b68bb1c09182bfa2_8nax2_512.jpg");
 		dellLaptop.setAssetId("8462-5735-5711-0479");
-		assetRepository.save(dellLaptop);
+		assetService.saveAsset(dellLaptop);
 
 		log.info("Saved Laptop - id: " + dellLaptop.getId());
 
@@ -98,7 +91,7 @@ public class SpringJpaBootstrap implements ApplicationListener<ContextRefreshedE
 		phone.setImageUrl(
 				"https://js-jackson.info/wp-content/uploads/2017/12/jackson_collection_smartphone-rf412049699c14ba5b68bb1c09182bfa2_8nax2_512.jpg");
 		phone.setAssetId("SM-G930F");
-		assetRepository.save(phone);
+		assetService.saveAsset(phone);
 
 		log.info("Saved phone - id: " + phone.getId());
 
@@ -108,7 +101,7 @@ public class SpringJpaBootstrap implements ApplicationListener<ContextRefreshedE
 		ipad.setImageUrl(
 				"https://js-jackson.info/wp-content/uploads/2017/12/jackson_collection_tablet-rf412049699c14ba5b68bb1c09182bfa2_8nax2_512.jpg");
 		ipad.setAssetId("xder-4625-jkut-7355");
-		assetRepository.save(ipad);
+		assetService.saveAsset(ipad);
 
 		log.info("Saved pad - id: " + ipad.getId());
 

@@ -1,6 +1,5 @@
 package info.jsjackson.catalog.configuration;
 
-import org.jasypt.springsecurity3.authentication.encoding.PasswordEncoder;
 import org.jasypt.util.password.StrongPasswordEncryptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -12,6 +11,8 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 /*
  *  When doing Java configuration for Spring Security, you need to extend the WebSecurityConfigurerAdapater class 
@@ -46,13 +47,17 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 	 * @param passwordEncryptor
 	 * @return PasswordEncoder
 	 */
-	@Bean
+	/*@Bean
 	public PasswordEncoder passwordEncoder(StrongPasswordEncryptor passwordEncryptor) {
 		PasswordEncoder passwordEncoder = new PasswordEncoder();
 		passwordEncoder.setPasswordEncryptor(passwordEncryptor);
 		return passwordEncoder;
-		
-	}
+	}*/
+	
+	  @Bean
+	  public PasswordEncoder passwordEncoder() {
+	      return new BCryptPasswordEncoder();
+	  }
 	
 	 @Autowired  //--Spring Security’s in-memory authentication provider
 	 public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {

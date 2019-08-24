@@ -11,11 +11,10 @@ public class AssetServiceImpl implements AssetService {
 
 	private AssetRepository assetRepository;
 
-	@Autowired
-	public void setAssetRepository(AssetRepository assetRepository) {
-	    this.assetRepository = assetRepository;
+	public AssetServiceImpl(AssetRepository assetRepository) {
+		this.assetRepository = assetRepository;
 	}
-	
+
 	@Override
 	public Iterable<Asset> listAllAssets() {
 		return assetRepository.findAll();
@@ -23,7 +22,7 @@ public class AssetServiceImpl implements AssetService {
 
 	@Override
 	public Asset getAssetById(Integer id) {
-		return assetRepository.findOne(id);
+		return assetRepository.findById(id).orElse(null);
 	}
 
 	
@@ -36,7 +35,7 @@ public class AssetServiceImpl implements AssetService {
 	
 	@Override
 	public void deleteAssetById(Integer id) {
-		assetRepository.delete(id);
+		assetRepository.deleteById(id);
 		
 	}
 
